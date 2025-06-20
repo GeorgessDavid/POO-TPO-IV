@@ -1,10 +1,34 @@
-import java.util.*;
+package org.uade.controller;
 
+import org.uade.dto.FuncionDTO;
+import org.uade.dto.VentaDto;
+import org.uade.enums.TipoGenero;
+import org.uade.enums.TipoTarjeta;
+import org.uade.model.Funcion;
+import org.uade.model.Venta;
 
-/**
- * 
- */
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class VentasController {
+
+    private static VentasController instance;
+    private static FuncionController funcionController;
+    private List<Venta> ventas;
+
+    private VentasController(){
+        funcionController = FuncionController.getInstance();
+        ventas = new ArrayList<>();
+        ventas.add(new Venta(1,new Date(), null, null));
+    }
+
+    public static VentasController getInstance(){
+        if(instance == null) instance = new VentasController();
+
+        return instance;
+    }
 
     public List<Venta> getVentas() {
         return ventas;
@@ -14,34 +38,12 @@ public class VentasController {
         this.ventas = ventas;
     }
 
-    /**
-     * Default constructor
-     */
-    private List<Venta> ventas;
 
-    private FuncionController funcionController =  new FuncionController();
-	
-    public VentasController(){
-        ventas = new ArrayList<Venta>();
-        Venta venta = new Venta(1,new Date(), null, null);
-        ventas.add(venta);
-    }
-
-
-    /**
-     * @param funcionID 
-     * @return
-     */
     public float recaudacionPorFuncion(int funcionID) {
         // TODO implement here
         return 0.0f;
     }
 
-    /**
-     * Caso de secuencia a desarrollar
-     * @param peliculaID
-     * @return
-     */
     public float recaudacionPorPelicula(int peliculaID) {
         List<Funcion> funciones = funcionController.buscarPeliculaPorFuncion(peliculaID);
         if(funciones.isEmpty()){
@@ -57,18 +59,11 @@ public class VentasController {
     	return totalrecuadado;
     }
 
-    /**
-     * @param tipoTarjeta 
-     * @return
-     */
     public float recaudacionPorTarjetaDescuento(TipoTarjeta tipoTarjeta) {
         // TODO implement here
         return 0.0f;
     }
 
-    /**
-     * 
-     */
     public void comboMasVendido() {
         // TODO implement here
     }
@@ -82,12 +77,6 @@ public class VentasController {
         return null;
     }
 
-    /**
-     * View a desarrollar
-     *
-     * @param genero
-     * @return
-     */
     public List<VentaDto> funcionesVendidasPorGenero(TipoGenero genero) {
         List<VentaDto> ventaDtos = new ArrayList<>();
         List<Funcion> funciones = funcionController.buscarPeliculaPorGenerosFuncion(genero);
@@ -110,5 +99,4 @@ public class VentasController {
     public FuncionDTO modelFuncionToDto(Funcion funcion){
         return new FuncionDTO(funcion);
     }
-
 }

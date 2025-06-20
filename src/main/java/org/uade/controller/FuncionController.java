@@ -1,66 +1,52 @@
+package org.uade.controller;
 
-import java.util.*;
+import org.uade.dto.FuncionDTO;
+import org.uade.enums.TipoGenero;
+import org.uade.enums.TipoProyeccion;
+import org.uade.model.Funcion;
+import org.uade.model.Pelicula;
+import org.uade.model.Sala;
 
-/**
- * 
- */
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+
 public class FuncionController {
-	
+
+    private static FuncionController instance;
 	private List<Funcion> funciones;
-
-	public static FuncionController instancia;
 	
-	FuncionController() {
-    	funciones = new ArrayList<Funcion>();
-    	funciones.add(new Funcion(new Date(), 1, "11:00", new ArrayList<Entrada>(), new Sala(0, null, 0),
-                new Pelicula(TipoGenero.Terror,"steven spielberg",120,"Tiburon",TipoProyeccion.DosD,new ArrayList<>(),null)));
-
+	private FuncionController() {
+    	funciones = new ArrayList<>();
+    	funciones.add(new Funcion(new Date(), 1, "11:00", new ArrayList<>(), new Sala(0, null, 0),
+                new Pelicula(TipoGenero.TERROR,"steven spielberg",120,"Tiburon", TipoProyeccion.DOS_D,new ArrayList<>(),null)));
     }
 
-    /**
-     * Default constructor
-     */
+    public static FuncionController getInstance(){
+        if(instance == null) instance = new FuncionController();
 
+        return instance;
+    }
 
-
-
-
-    /**
-     * 
-     */
     public void ABM() {
         // TODO implement here
     }
 
-    /**
-     * @param funcionID 
-     * @return
-     */
     public int obtenerAsientosDisponiblePorFuncion(int funcionID) {
     	int asientos = -1;
 		return asientos;
     }
 
-    /**
-     * @param fchFuncion 
-     * @return
-     */
     public List<FuncionDTO> getListaFunciones(Date fchFuncion) {
         // TODO implement here
         return null;
     }
 
-    /**
-     * @return
-     */
     public int peliculaMasVista() {
         // TODO implement here
         return 0;
     }
 
-    /**
-     * @return
-     */
     public int diaDeLaSemanaConMenorVentas() {
         // TODO implement here
         return 0;
@@ -69,7 +55,7 @@ public class FuncionController {
     public List<Funcion> buscarPeliculaPorFuncion(int peliculaID) {
         List<Funcion> funcionesDeLaPelicula = new ArrayList<>();
         for (Funcion funcion : funciones) {
-            if (funcion.getPeliculaID() == peliculaID){
+            if (funcion.getPelicula().getId == peliculaID){
                 funcionesDeLaPelicula.add(funcion);
             }
         }
