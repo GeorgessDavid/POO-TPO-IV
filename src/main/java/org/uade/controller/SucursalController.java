@@ -1,5 +1,6 @@
 package org.uade.controller;
 
+import org.uade.model.Sala;
 import org.uade.model.Sucursal;
 
 import java.util.List;
@@ -21,11 +22,23 @@ public class SucursalController {
         return instance;
     }
 
-    public void agregarSucursal(int id, String denom, String dir) {
-        // TODO implement here
+    public void agregarSucursal(int id, String denom, String dir,List<Sala> arr) {
+        if(buscarSucursal(id)!=null) return;
+
+        sucursales.add(new Sucursal(id,denom,dir,arr));
     }
     public void agregarSala(int idSucursal, int salaID, String denom, int nroasientos) {
-        // TODO implement here
+        Sucursal s = buscarSucursal(idSucursal);
+        if(s==null) return;
+
+        s.setSala(new Sala(salaID, denom, nroasientos));
+    }
+
+    private Sucursal buscarSucursal(int id){
+        for(Sucursal s : sucursales){
+            if(s.getSucursalID()==id) return s;
+        }
+        return null;
     }
 
 }

@@ -40,8 +40,10 @@ public class VentasController {
 
 
     public float recaudacionPorFuncion(int funcionID) {
-        // TODO implement here
-        return 0.0f;
+        Venta venta = buscarVentaPorIdFuncion(funcionID);
+        if(venta==null) return 0.0f;
+
+        return venta.calcularMontoDeLaVentaPorFuncionCombos();
     }
 
     public float recaudacionPorPelicula(int peliculaID) {
@@ -52,27 +54,44 @@ public class VentasController {
         float totalrecuadado = 0.0f;
         for (Funcion funcion:funciones) {
             Venta venta = buscarVentaPorFuncion(funcion);
-            if(Objects.isNull(venta)){
-                totalrecuadado=+venta.calcularMontoDeLaVentaPorFuncionCombos();
+            if(venta != null){
+                totalrecuadado=+venta.getTotal();
             }
         }
     	return totalrecuadado;
     }
 
     public float recaudacionPorTarjetaDescuento(TipoTarjeta tipoTarjeta) {
-        // TODO implement here
-        return 0.0f;
+        float total = 0.0f;
+        if(ventas.isEmpty()) return total;
+
+        for(Venta venta : ventas){
+            if(venta.getTarjetaDescuento().getTipoTarjeta() == tipoTarjeta) total += venta.getTotal();
+        }
+
+        return total;
     }
 
     public void comboMasVendido() {
         // TODO implement here
     }
 
-    private  Venta buscarVentaPorFuncion(Funcion funcion){
-        for (Venta venta:getVentas()) {
+    private Venta buscarVentaPorFuncion(Funcion funcion){
+        if(ventas.isEmpty()) return null;
+
+        for (Venta venta:ventas) {
             if(Objects.equals(funcion,venta.getFuncion())){
                 return venta;
             }
+        }
+        return null;
+    }
+
+    private Venta buscarVentaPorIdFuncion(int id){
+        if(ventas.isEmpty()) return null;
+
+        for(Venta v : ventas){
+            if(v.getFuncion().getFuncionID()==id) return v;
         }
         return null;
     }

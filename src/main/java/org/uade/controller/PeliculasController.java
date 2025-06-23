@@ -2,6 +2,7 @@ package org.uade.controller;
 
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
+import org.uade.model.CondicionesDescuento;
 import org.uade.model.Pelicula;
 
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class PeliculasController {
 	
     private PeliculasController() {
     	peliculas= new ArrayList<Pelicula>();
-    	peliculas.add(new Pelicula(TipoGenero.SUSPENSO, "Pelicula1", 180 , "Director X", TipoProyeccion.DOS_D, Arrays.asList("Actriz Principal", "Actor Secundario"),null));
+    	peliculas.add(new Pelicula(1,TipoGenero.SUSPENSO, "Pelicula1", 180 , "Director X", TipoProyeccion.DOS_D, Arrays.asList("Actriz Principal", "Actor Secundario"),null));
     }
 
     public static PeliculasController getInstance(){
@@ -24,8 +25,26 @@ public class PeliculasController {
         return instance;
     }
 
-    public void ABM() {
-        // TODO implement here
+    public void altaPelicula(int id,TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
+        if(buscarPelicula(id)!=null) return;
+
+        peliculas.add(new Pelicula(id,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
     }
 
+    public void bajaPelicula(int id){
+        Pelicula pelicula = buscarPelicula(id);
+        if(pelicula == null) return;
+
+        peliculas.remove(pelicula);
+    }
+
+    public void modificarPelicula(){}
+
+    private Pelicula buscarPelicula(int id){
+
+        for(Pelicula pelicula : peliculas){
+            if(pelicula.getPeliculaId()==id) return pelicula;
+        }
+        return null;
+    }
 }

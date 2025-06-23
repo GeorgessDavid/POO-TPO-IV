@@ -26,6 +26,21 @@ public class DescuentoController {
 		return instance;
 	}
 
-    public void ABM() {
+	public void altaDescuento(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuento> tarjetaDescuento){
+		if(buscarDescuento(fchDesde,fchHasta)!= null) return;
+
+		descuento.add(new CondicionesDescuento(fchDesde, fchHasta, diaSemana, porcentaje, tipoTarjeta, tarjetaDescuento));
+	}
+
+	public void bajaDescuento(){}
+
+	public void modificarDescuento(){}
+
+	private CondicionesDescuento buscarDescuento(Date fechaDesde, Date fechaHasta){
+
+		for(CondicionesDescuento cd : descuento){
+			if(cd.getFchDesde().equals(fechaDesde) && cd.getFchHasta().equals(fechaHasta)) return cd;
+		}
+		return null;
 	}
 }
