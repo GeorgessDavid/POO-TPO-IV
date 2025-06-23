@@ -3,7 +3,6 @@ package org.uade.model;
 import java.util.Date;
 import java.util.List;
 
-
 public class Venta {
 
     private int ventaID;
@@ -38,16 +37,7 @@ public class Venta {
         return tarjetaDescuento;
     }
 
-    /* Implementar
-
-    public TipoTarjeta getTipoTarjeta(){
-        return
-    }
-
-    public float getTotal(){
-
-    }
-     */
+    public float getTotal() { return calcularMontoDeLaVentaPorFuncionCombos()+calcularMontoPorComboDeVenta();}
 
     public void setFuncion(Funcion funcion) {
         this.funcion = funcion;
@@ -59,7 +49,7 @@ public class Venta {
 
     public float calcularMontoPorComboDeVenta(){
         float total=  0.0f;
-        for (Combo combo:getListaComboID()) {
+        for (Combo combo : combos) {
            total =+  (combo.getPrecio()-(combo.getPrecio()*
                    CondicionesDescuento.getDescuentoPorTarjeta(tarjetaDescuento.getTipoTarjeta())));
         }
@@ -67,6 +57,6 @@ public class Venta {
     }
 
     public float calcularMontoDeLaVentaPorFuncionCombos(){
-        return funcion.calcularMontoPorEntradaDeLaPelicula()+calcularMontoPorComboDeVenta();
+        return funcion.calcularMontoPorEntradaDeLaPelicula();
     }
 }

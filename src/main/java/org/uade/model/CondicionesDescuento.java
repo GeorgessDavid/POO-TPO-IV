@@ -14,7 +14,7 @@ public class CondicionesDescuento {
     private TipoTarjeta tipoTarjeta;
     private List<TarjetaDescuento> tarjetaDescuento;
 
-    public CondicionesDescuento(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjetaList, List<TarjetaDescuento> tarjetaDescuento) {
+    public CondicionesDescuento(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuento> tarjetaDescuento) {
     	this.diaSemana = diaSemana;
     	this.fchDesde = fchDesde;
     	this.fchHasta = fchHasta;
@@ -54,7 +54,7 @@ public class CondicionesDescuento {
 
     public float getDescuento(){
         float descuento = 0.0f;
-        for (TarjetaDescuento tarjetaDescuento: getTarjetaDescuento()) {
+        for (TarjetaDescuento tarjetaDescuento: tarjetaDescuento) {
             descuento += getDescuentoPorTarjeta(tarjetaDescuento.getTipoTarjeta());
         }
         descuento=descuento+porcentaje;
@@ -63,12 +63,14 @@ public class CondicionesDescuento {
 
 
     public static float getDescuentoPorTarjeta(TipoTarjeta tipoTarjeta){
+        float descuento;
         switch (tipoTarjeta){
-            case PAMI -> { return 0.25f; }
-            case UADE, MOVIE_CLUB ->{ return 0.15f;}
-            case LA_NACION,CLARIN_365 -> {return 0.5f;}
-            default -> {return 0.0f;}
+            case PAMI -> descuento = 0.25f;
+            case UADE, MOVIE_CLUB -> descuento = 0.15f;
+            case LA_NACION,CLARIN_365 -> descuento = 0.5f;
+            default -> descuento = 0.0f;
         }
+        return descuento;
     }
 
 

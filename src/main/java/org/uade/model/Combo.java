@@ -26,7 +26,7 @@ public class Combo {
         return precio;
     }
 
-    public CondicionesDescuento getContiene() {
+    public CondicionesDescuento getCondicionesDescuento() {
         return contiene;
     }
 }

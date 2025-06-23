@@ -14,7 +14,6 @@ public class Funcion {
     private Sala sala;
 
     public Funcion(Date fecha, int funcionID, String horario,List<Entrada> entradas, Sala sala, Pelicula pelicula) {
-    	this.entradas = new ArrayList<>();
     	this.fecha = fecha;
     	this.funcionID = funcionID;
         this.entradas = entradas;
@@ -44,9 +43,13 @@ public class Funcion {
         return sala;
     }
 
+    public Date getFecha(){
+        return fecha;
+    }
+
     public float calcularMontoPorEntradaDeLaPelicula(){
         float total = 0.0f;
-        for (Entrada entrada:getEntradas()) {
+        for (Entrada entrada:entradas) {
             total = total+ (entrada.getPrecio() -
                     (entrada.getPrecio()*pelicula.getCondicionesDescuento().getDescuento()));
         }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Pelicula {
 
+    private int id;
     private TipoGenero generoID;
     private String nombrePelicula;
     private int duracionEnMinutos;
@@ -16,7 +17,7 @@ public class Pelicula {
     private TipoProyeccion tipo;
     private CondicionesDescuento condicionesDescuento;
 
-    public Pelicula(TipoGenero generoID, String director, int duracionEnMinutos, String nombrePelicula, TipoProyeccion tipo, List<String> actores, CondicionesDescuento descuento) {
+    public Pelicula(int id, TipoGenero generoID, String director, int duracionEnMinutos, String nombrePelicula, TipoProyeccion tipo, List<String> actores, CondicionesDescuento descuento) {
         this.director = director;
         this.duracionEnMinutos = duracionEnMinutos;
         this.generoID = generoID;
@@ -56,6 +57,10 @@ public class Pelicula {
 
     public void setGeneroID(TipoGenero generoID){
         this.generoID = generoID;
+    }
+
+    public int getPeliculaId(){
+        return id;
     }
 
     public void setActor(String actor){
