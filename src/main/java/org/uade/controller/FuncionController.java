@@ -16,7 +16,7 @@ public class FuncionController {
 
     private static FuncionController instance;
 	private List<Funcion> funciones;
-	
+
 	private FuncionController() {
     	funciones = new ArrayList<>();
     	funciones.add(new Funcion(new Date(), 1, "11:00", new ArrayList<>(), new Sala(0, null, 0),
@@ -96,7 +96,7 @@ public class FuncionController {
         return funcionesDeLaPelicula;
     }
 
-    private Funcion buscarFuncion(int id){
+    public Funcion buscarFuncion(int id){
 
         for(Funcion funcion : funciones){
             if(funcion.getFuncionID() == id) return funcion;
