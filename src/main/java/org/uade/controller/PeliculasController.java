@@ -2,6 +2,7 @@ package org.uade.controller;
 
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
+import org.uade.exceptions.NotFoundException;
 import org.uade.model.CondicionesDescuento;
 import org.uade.model.Pelicula;
 
@@ -44,6 +45,17 @@ public class PeliculasController {
             if(pelicula.getPeliculaId()==id) return pelicula;
         }
         return null;
+    }
+
+    public List<Pelicula> buscarPeliculaPorGenero(TipoGenero genero){
+        List<Pelicula> pelis = new ArrayList<Pelicula>();
+        for(Pelicula pelicula : peliculas){
+            if(pelicula.getGeneroID()==genero) pelis.add(pelicula);
+        }
+
+        if (pelis.isEmpty()) throw new NotFoundException("No se encontraron películas.");
+
+        return pelis;
     }
 
     public void reset(){
