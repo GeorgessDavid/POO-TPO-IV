@@ -61,7 +61,15 @@ public class FuncionController {
         List<FuncionDTO> funcionList = new ArrayList<>();
 
         for(Funcion funcion : funciones){
-            if(funcion.getFecha().equals(fchFuncion)) funcionList.add(new FuncionDTO(funcion));
+            if(funcion.getFecha().equals(fchFuncion)) funcionList.add(
+                    new FuncionDTO(
+                            funcion.getPelicula(),
+                            funcion.getFuncionID(),
+                            funcion.getHorario(),
+                            funcion.getFecha(),
+                            funcion.getEntradas(),
+                            funcion.getSala()
+                    ));
         }
         return funcionList;
     }
