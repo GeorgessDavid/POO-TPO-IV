@@ -2,8 +2,8 @@ package org.uade.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.uade.controller.DescuentoController;
 import org.uade.controller.FuncionController;
-import org.uade.dto.FuncionDTO;
 import org.uade.enums.TipoTarjeta;
 import org.uade.model.*;
 import org.uade.enums.TipoGenero;
@@ -13,7 +13,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FuncionControllerTest {
+public class AddFuncionTest {
     private FuncionController controller;
 
     @BeforeEach
@@ -27,7 +27,7 @@ public class FuncionControllerTest {
         int id = 101;
         String horario = "20:00";
         List<Entrada> entradas = new ArrayList<>();
-        Sala sala = new Sala (110, "2D", 50);
+        Sala sala = new Sala(110, "2D", 50);
         CondicionesDescuento descuento = new CondicionesDescuento(new Date(), new Date(), 2, 0.2F, TipoTarjeta.CLARIN_365, new ArrayList<TarjetaDescuento>());
         Pelicula pelicula = new Pelicula(101, TipoGenero.TERROR, "Christopher Nolan", 167, "Interestellar", TipoProyeccion.TRES_D_MAX, new ArrayList<String>(), descuento);
 
@@ -41,22 +41,23 @@ public class FuncionControllerTest {
     }
 
     @Test
-    public void testAddFuncion_Fail_InvalidDate(){
+    public void testAddFuncion_Fail_InvalidDate() {
         Date fecha = new Date();
         int id = 101;
         String horario = "20:00";
         List<Entrada> entradas = new ArrayList<>();
-        Sala sala = new Sala (110, "2D", 50);
-        CondicionesDescuento descuento = new CondicionesDescuento(new Date(System.currentTimeMillis() + 100000), new Date(), 2, 0.2F, TipoTarjeta.CLARIN_365, new ArrayList<TarjetaDescuento>());
-        Pelicula pelicula = new Pelicula(101, TipoGenero.TERROR, "Christopher Nolan", 167, "Interestellar", TipoProyeccion.TRES_D_MAX, new ArrayList<String>(), descuento);
+        Sala sala = new Sala(110, "2D", 50);
 
-        controller.altaFuncion(fecha, id, horario, entradas, sala, pelicula);
+        DescuentoController descuentoController = DescuentoController.getInstance();
 
-        Funcion funcion = controller.buscarFuncion(id);
-        assertNull(funcion, "La función no debería haberse registrado debido a la fecha inválida.");
+        Exception e = assertThrows(IllegalArgumentException.class, () -> {
+            descuentoController.altaDescuento(new Date(System.currentTimeMillis() + 100000), new Date(), 2, 0.2F, TipoTarjeta.CLARIN_365, new ArrayList<TarjetaDescuento>());
+        });
 
-        // Verificar que no se haya agregado ninguna función
-        List<FuncionDTO> funciones = controller.getListaFunciones(new Date());
-        assertTrue(funciones.isEmpty(), "No debería haber funciones registradas.");
+//        Pelicula pelicula = new Pelicula(101, TipoGenero.TERROR, "Christopher Nolan", 167, "Interestellar", TipoProyeccion.TRES_D_MAX, new ArrayList<String>(), descuento);
+
+//        controller.altaFuncion(fecha, id, horario, entradas, sala, pelicula);
+
+        assertEquals("La fecha de inicio no puede ser mayor a la fecha de fin.", e.getMessage());
     }
 }
