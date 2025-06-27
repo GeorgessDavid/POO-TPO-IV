@@ -112,10 +112,23 @@ public class VentasController {
     }
 
     public VentaDTO modelVentaToDto(Venta venta){
-        return new VentaDTO(modelFuncionToDto(venta.getFuncion()));
+        return new VentaDTO(
+                venta.getVentaID(),
+                venta.getFchVenta(),
+                venta.getCombos(),
+                venta.getFuncion(),
+                venta.getTarjetaDescuento()
+        );
     }
 
     public FuncionDTO modelFuncionToDto(Funcion funcion){
-        return new FuncionDTO(funcion);
+        return new FuncionDTO(
+                funcion.getPelicula(),
+                funcion.getFuncionID(),
+                funcion.getHorario(),
+                funcion.getFecha(),
+                funcion.getEntradas(),
+                funcion.getSala()
+        );
     }
 }
