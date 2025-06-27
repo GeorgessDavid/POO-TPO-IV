@@ -18,6 +18,7 @@ public class Pelicula {
     private CondicionesDescuento condicionesDescuento;
 
     public Pelicula(int id, TipoGenero generoID, String director, int duracionEnMinutos, String nombrePelicula, TipoProyeccion tipo, List<String> actores, CondicionesDescuento descuento) {
+        this.id = id;
         this.director = director;
         this.duracionEnMinutos = duracionEnMinutos;
         this.generoID = generoID;

@@ -26,8 +26,7 @@ public class PeliculasController {
     }
 
     public void altaPelicula(int id,TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
-        if(buscarPelicula(id)!=null) return;
-
+        if(buscarPelicula(id)!=null) throw new IllegalArgumentException("Esta pelicula ya existe");
         peliculas.add(new Pelicula(id,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
     }
 
@@ -40,11 +39,14 @@ public class PeliculasController {
 
     public void modificarPelicula(){}
 
-    private Pelicula buscarPelicula(int id){
-
+    public Pelicula buscarPelicula(int id){
         for(Pelicula pelicula : peliculas){
             if(pelicula.getPeliculaId()==id) return pelicula;
         }
         return null;
+    }
+
+    public void reset(){
+        peliculas.clear();
     }
 }
