@@ -47,12 +47,15 @@ public class Funcion {
         return fecha;
     }
 
-    public float calcularMontoPorEntradaDeLaPelicula(){
-        float total = 0.0f;
-        for (Entrada entrada:entradas) {
-            total = total+ (entrada.getPrecio() -
-                    (entrada.getPrecio()*pelicula.getCondicionesDescuento().getDescuento()));
+    public float calcularMontoPorEntradaDeLaPelicula() {
+        float total = 0.0F;
+
+        for (Entrada entrada : entradas) {
+            float precioEntrada = entrada.getPrecio() - (entrada.getPrecio() * pelicula.getCondicionesDescuento().getDescuento());
+
+            total += precioEntrada;
         }
+
         return total;
     }
 
