@@ -29,6 +29,7 @@ public class DescuentoController {
 	public void altaDescuento(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuento> tarjetaDescuento){
 		if(buscarDescuento(fchDesde,fchHasta)!= null) return;
 
+		if (fchDesde.after(fchHasta)) throw new IllegalArgumentException("La fecha de inicio no puede ser mayor a la fecha de fin.");
 		descuento.add(new CondicionesDescuento(fchDesde, fchHasta, diaSemana, porcentaje, tipoTarjeta, tarjetaDescuento));
 	}
 

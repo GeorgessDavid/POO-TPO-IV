@@ -15,13 +15,12 @@ public class CondicionesDescuento {
     private List<TarjetaDescuento> tarjetaDescuento;
 
     public CondicionesDescuento(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuento> tarjetaDescuento) {
-    	this.diaSemana = diaSemana;
+        this.diaSemana = diaSemana;
     	this.fchDesde = fchDesde;
     	this.fchHasta = fchHasta;
     	this.porcentaje = porcentaje;
     	this.tipoTarjeta = tipoTarjeta;
     	this.tarjetaDescuento = tarjetaDescuento;
-    
     }
 
     public Date getFchDesde() {
