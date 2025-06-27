@@ -1,7 +1,7 @@
 package org.uade.controller;
 
 import org.uade.dto.FuncionDTO;
-import org.uade.dto.VentaDto;
+import org.uade.dto.VentaDTO;
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoTarjeta;
 import org.uade.model.Funcion;
@@ -96,8 +96,8 @@ public class VentasController {
         return null;
     }
 
-    public List<VentaDto> funcionesVendidasPorGenero(TipoGenero genero) {
-        List<VentaDto> ventaDtos = new ArrayList<>();
+    public List<VentaDTO> funcionesVendidasPorGenero(TipoGenero genero) {
+        List<VentaDTO> ventaDtos = new ArrayList<>();
         List<Funcion> funciones = funcionController.buscarPeliculaPorGenerosFuncion(genero);
         if(funciones.isEmpty()){
             return ventaDtos;
@@ -111,8 +111,8 @@ public class VentasController {
         return ventaDtos;
     }
 
-    public VentaDto modelVentaToDto(Venta venta){
-        return new VentaDto(modelFuncionToDto(venta.getFuncion()));
+    public VentaDTO modelVentaToDto(Venta venta){
+        return new VentaDTO(modelFuncionToDto(venta.getFuncion()));
     }
 
     public FuncionDTO modelFuncionToDto(Funcion funcion){
