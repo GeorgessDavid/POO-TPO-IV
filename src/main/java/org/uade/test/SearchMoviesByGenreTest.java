@@ -1,9 +1,11 @@
 package org.uade.test;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.uade.controller.PeliculasController;
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
+import org.uade.exceptions.NotFoundException;
 import org.uade.model.Pelicula;
 
 import java.util.ArrayList;
@@ -11,13 +13,14 @@ import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class SearchMoviesByGenreTest {
     private PeliculasController controller;
 
     @BeforeEach
     public void setUp() {
         controller = PeliculasController.getInstance();
-
+        controller.reset(); // Vaciamos el listado de películas para correr todos los tests.
 //      Agregado de películas para hacer funcional el test.
         controller.altaPelicula(1, TipoGenero.SUSPENSO, "Director X", 120, "Suspenso Movie", TipoProyeccion.DOS_D, new ArrayList<>(), null);
         controller.altaPelicula(2, TipoGenero.DRAMA, "Director Y", 150, "Drama Movie", TipoProyeccion.TRES_D, new ArrayList<>(), null);
@@ -34,4 +37,14 @@ public class SearchMoviesByGenreTest {
             assertEquals(TipoGenero.SUSPENSO, pelicula.getGeneroID(), "La película no es del género SUSPENSO.");
         }
     }
+
+    @Test
+    public void testSearchMoviesByGenre_Fail_NoMoviesFound() {
+        Exception e = assertThrows(NotFoundException.class, () -> {
+            controller.buscarPeliculaPorGenero(TipoGenero.TERROR);
+        });
+
+        assertEquals("No se encontraron películas.", e.getMessage(), "El mensaje de error no coincide.");
+    }
+
 }
