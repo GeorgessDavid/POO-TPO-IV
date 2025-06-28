@@ -14,7 +14,9 @@ public class PeliculasController {
 
     private static PeliculasController instance;
 	private List<Pelicula> peliculas;
-	
+
+    private int contadorId;
+
     private PeliculasController() {
     	peliculas= new ArrayList<Pelicula>();
     	peliculas.add(new Pelicula(1,TipoGenero.SUSPENSO, "Pelicula1", 180 , "Director X", TipoProyeccion.DOS_D, Arrays.asList("Actriz Principal", "Actor Secundario"),null));
@@ -26,9 +28,11 @@ public class PeliculasController {
         return instance;
     }
 
-    public void altaPelicula(int id,TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
-        if(buscarPelicula(id)!=null) throw new IllegalArgumentException("Esta pelicula ya existe");
-        peliculas.add(new Pelicula(id,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
+    public void altaPelicula(TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
+        if(buscarPelicula(contadorId)!=null) throw new IllegalArgumentException("Esta pelicula ya existe");
+
+        peliculas.add(new Pelicula(contadorId,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
+        contadorId++;
     }
 
     public void bajaPelicula(int id){

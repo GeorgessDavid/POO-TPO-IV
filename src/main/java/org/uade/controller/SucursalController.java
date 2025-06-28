@@ -10,6 +10,8 @@ public class SucursalController {
 
     private static SucursalController instance;
 	private List<Sucursal> sucursales;
+
+    private int contadorId;
 		
     public SucursalController() {
     	sucursales = new ArrayList<Sucursal>();
@@ -22,10 +24,11 @@ public class SucursalController {
         return instance;
     }
 
-    public void agregarSucursal(int id, String denom, String dir,List<Sala> arr) {
-        if(buscarSucursal(id)!=null) return;
+    public void agregarSucursal(String denom, String dir,List<Sala> arr) {
+        if(buscarSucursal(contadorId)!=null) return;
 
-        sucursales.add(new Sucursal(id,denom,dir,arr));
+        sucursales.add(new Sucursal(contadorId,denom,dir,arr));
+        contadorId++;
     }
     public void agregarSala(int idSucursal, int salaID, String denom, int nroasientos) {
         Sucursal s = buscarSucursal(idSucursal);

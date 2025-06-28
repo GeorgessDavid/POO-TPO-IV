@@ -15,9 +15,16 @@ import java.util.ArrayList;
 public class FuncionController {
 
     private static FuncionController instance;
+
+    private PeliculasController peliculasController;
+    private SucursalController sucursalController;
 	private List<Funcion> funciones;
 
+    private int contadorId;
+
 	private FuncionController() {
+        this.peliculasController = PeliculasController.getInstance();
+        this.sucursalController = SucursalController.getInstance();
     	funciones = new ArrayList<>();
     	funciones.add(new Funcion(new Date(), 1, "11:00", new ArrayList<>(), new Sala(0, null, 0),
                 new Pelicula(1,TipoGenero.TERROR,"steven spielberg",120,"Tiburon", TipoProyeccion.DOS_D,new ArrayList<>(),null)));
@@ -29,10 +36,12 @@ public class FuncionController {
         return instance;
     }
 
-    public void altaFuncion(Date fecha, int id, String horario, List<Entrada> entradas, Sala sala, Pelicula pelicula){
-        if(buscarFuncion(id)!=null) return;
+    public void altaFuncion(Date fecha, String horario, List<Entrada> entradas, int idSala, int idPelicula){
+        Sala sala = SucursalController.buscarSala(idSala);
+        Pelicula pelicula = peliculasController.buscarPelicula(idPelicula);
 
-        funciones.add(new Funcion(fecha,id,horario,entradas,sala,pelicula));
+        funciones.add(new Funcion(fecha,contadorId,horario,entradas,sala,pelicula));
+        contadorId++;
     }
 
     public void bajaFuncion(int id){
