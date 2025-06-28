@@ -26,7 +26,7 @@ public class AddMovieTest {
     @BeforeEach
     public void setUp() {
         controller = PeliculasController.getInstance();
-        controller.reset(); // Vaciamos el listado de películas
+        controller.reset();
 
         genero = TipoGenero.DRAMA;
         director = "Christopher Nolan";

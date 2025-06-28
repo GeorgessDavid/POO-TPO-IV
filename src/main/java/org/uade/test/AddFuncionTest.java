@@ -46,8 +46,8 @@ public class AddFuncionTest {
 
         Exception e = assertThrows(IllegalArgumentException.class, () -> {
             descuentoController.altaDescuento(
-                    new Date(System.currentTimeMillis() + 100_000), // fechaInicio futura
-                    new Date(), // fechaFin anterior
+                    new Date(System.currentTimeMillis() + 100_000),
+                    new Date(),
                     2,
                     0.2F,
                     TipoTarjeta.CLARIN_365,

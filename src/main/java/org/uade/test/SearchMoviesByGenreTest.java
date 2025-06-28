@@ -20,8 +20,8 @@ public class SearchMoviesByGenreTest {
     @BeforeEach
     public void setUp() {
         controller = PeliculasController.getInstance();
-        controller.reset(); // Vaciamos el listado de películas para correr todos los tests.
-//      Agregado de películas para hacer funcional el test.
+        controller.reset();
+
         controller.altaPelicula(TipoGenero.SUSPENSO, "Director X", 120, "Suspenso Movie", TipoProyeccion.DOS_D, new ArrayList<>(), null);
         controller.altaPelicula(TipoGenero.DRAMA, "Director Y", 150, "Drama Movie", TipoProyeccion.TRES_D, new ArrayList<>(), null);
         controller.altaPelicula(TipoGenero.SUSPENSO, "Director Z", 130, "Another Suspense Movie", TipoProyeccion.DOS_D, new ArrayList<>(), null);

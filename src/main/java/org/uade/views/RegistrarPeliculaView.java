@@ -14,8 +14,7 @@ public class RegistrarPeliculaView extends JFrame {
 
     private JPanel contentPane;
 
-    private JLabel genero_lbl, nombre_lbl, duracion_lbl, director_lbl, actores_lbl, tipo_lbl;
-    private JComboBox<TipoGenero> genero_cb;
+    private JLabel nombre_lbl, duracion_lbl, director_lbl, actores_lbl, tipo_lbl;
     private JTextField nombre_txt, duracion_txt, director_txt, actores_txt;
     private JComboBox<TipoProyeccion> tipo_cb;
 
