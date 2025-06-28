@@ -1,5 +1,6 @@
 package org.uade.controller;
 
+import org.uade.dto.PeliculaDTO;
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
 import org.uade.exceptions.NotFoundException;
@@ -56,6 +57,19 @@ public class PeliculasController {
         if (pelis.isEmpty()) throw new NotFoundException("No se encontraron películas.");
 
         return pelis;
+    }
+
+    public PeliculaDTO modelToDto(Pelicula pelicula) {
+        return new PeliculaDTO(
+                pelicula.getPeliculaId(),
+                pelicula.getGeneroID(),
+                pelicula.getNombrePelicula(),
+                pelicula.getDuracionEnMinutos(),
+                pelicula.getDirector(),
+                pelicula.getActores(),
+                pelicula.getTipo(),
+                pelicula.getCondicionesDescuento()
+        );
     }
 
     public void reset(){
