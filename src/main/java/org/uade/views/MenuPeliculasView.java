@@ -8,16 +8,6 @@ import javax.swing.*;
 import java.util.List;
 
 
-/*
-- Crear un menú en **Swing** que permita controlar los siguientes casos de uso:
-    - Registrar una nueva función por género.
-    - Registrar una película por género.
-
-    - Consultar las películas por género.
-    - Emitir un reporte de las películas con mayor recaudación.
-*/
-
-
 public class MenuPeliculasView extends JFrame {
     private final JMenuItem menuItemRegistrarFuncion;
     private final JMenuItem menuItemRegistrarPelicula, menuItemConsultarPeliculas;
@@ -33,34 +23,25 @@ public class MenuPeliculasView extends JFrame {
         menuItemRegistrarFuncion = new JMenuItem("Registrar función");
         menuItemRegistrarFuncion.addActionListener(e -> new RegistrarFuncionView());
 
-        menuItemRegistrarPelicula = new JMenuItem("Registrar película");
-
-        menuItemConsultarPeliculas = new JMenu("Consultar películas"); // <- Submenú
+        menuItemRegistrarPelicula = new JMenu("Registrar película");
+        menuItemConsultarPeliculas = new JMenu("Consultar películas");
 
         TipoGenero[] generos = TipoGenero.values();
 
         for (TipoGenero genero : generos) {
-            JMenuItem generoItem = new JMenuItem(genero.toString());
-            menuItemConsultarPeliculas.add(generoItem);
+            JMenuItem itemRegistrar = new JMenuItem(genero.toString());
+            itemRegistrar.addActionListener(e -> onRegistrarPeliculaPorGenero(genero));
+            menuItemRegistrarPelicula.add(itemRegistrar);
 
-            generoItem.addActionListener(e -> {
-
-                List<PeliculaDTO> peliculas = PeliculasController.getInstance().buscarPeliculaPorGenero(TipoGenero.ROMANCE)
-                        .stream()
-                        .map(PeliculasController.getInstance()::modelToDto)
-                        .toList();
-
-                System.out.println("Consultando películas del género: " + genero);
-                new GeneroConsultadoView(genero, peliculas);
-            });
+            JMenuItem itemConsultar = new JMenuItem(genero.toString());
+            itemConsultar.addActionListener(e -> onConsultarPeliculasPorGenero(genero));
+            menuItemConsultarPeliculas.add(itemConsultar);
         }
 
         menuItemEmitirReportePeliculas = new JMenuItem("Emitir reporte de películas");
         menuItemEmitirReportePeliculas.addActionListener(e -> new EmitirReportePeliculasView());
-        //menuItemEmitirReportePeliculas.addActionListener(this);
 
         menuFunciones.add(menuItemRegistrarFuncion);
-
         menuPeliculas.add(menuItemRegistrarPelicula);
         menuPeliculas.add(menuItemConsultarPeliculas);
         menuPeliculas.add(menuItemEmitirReportePeliculas);
@@ -73,6 +54,23 @@ public class MenuPeliculasView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
+    }
+
+
+    private void onRegistrarPeliculaPorGenero(TipoGenero genero) {
+        System.out.println("Registrando película del género: " + genero);
+        new RegistrarPeliculaView(genero);
+    }
+
+    private void onConsultarPeliculasPorGenero(TipoGenero genero) {
+        List<PeliculaDTO> peliculas = PeliculasController.getInstance()
+                .buscarPeliculaPorGenero(genero)
+                .stream()
+                .map(PeliculasController.getInstance()::modelToDto)
+                .toList();
+
+        System.out.println("Consultando películas del género: " + genero);
+        new GeneroConsultadoView(genero, peliculas);
     }
 
     public static void main(String[] args) {

@@ -1,17 +1,55 @@
 package org.uade;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import org.uade.controller.PeliculasController;
+import org.uade.controller.SucursalController;
+import org.uade.enums.TipoGenero;
+import org.uade.enums.TipoProyeccion;
+import org.uade.model.SalaModel;
+import org.uade.views.MenuPeliculasView;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        PeliculasController peliculasController = PeliculasController.getInstance();
+        SucursalController sucursalController = SucursalController.getInstance();
+
+        // Agregamos nuevas películas
+        peliculasController.altaPelicula(
+                TipoGenero.DRAMA,
+                "Michael Bay",
+                140,
+                "Explosiones 2",
+                TipoProyeccion.TRES_D,
+                Arrays.asList("Actor A", "Actor B"),
+                null
+        );
+
+        peliculasController.altaPelicula(
+                TipoGenero.TERROR,
+                "Woody Allen",
+                95,
+                "Comedia Ligera",
+                TipoProyeccion.DOS_D,
+                Arrays.asList("Comediante X", "Actriz Y"),
+                null
+        );
+
+        // Agregamos una nueva sucursal con salas
+        SalaModel sala1 = new SalaModel(1, "Sala Principal", 100);
+        SalaModel sala2 = new SalaModel(2, "Sala Secundaria", 80);
+        List<SalaModel> salasSucursal1 = Arrays.asList(sala1, sala2);
+
+        sucursalController.agregarSucursal("Microcentro", "Av Corrientes 1234", salasSucursal1);
+
+        // Agregamos una sala a la sucursal existente con ID 1 (Barracas)
+        sucursalController.agregarSala(1, 2, "Sala VIP", 50);
+
+        System.out.println("Películas y sucursales cargadas correctamente.");
+
+        new MenuPeliculasView();
     }
 }

@@ -32,6 +32,14 @@ public class SucursalModel {
         return salas;
     }
 
+    public SalaModel buscarSala(int idSala) {
+        for (SalaModel sala : salas) {
+            if (sala.getSalaID() == idSala) return sala;
+        }
+
+        return null;
+    }
+
     public void setSala(SalaModel sala){
         salas.add(sala);
     }

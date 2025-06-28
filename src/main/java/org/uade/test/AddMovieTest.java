@@ -6,65 +6,61 @@ import org.uade.controller.PeliculasController;
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
 import org.uade.enums.TipoTarjeta;
-import org.uade.model.CondicionesDescuento;
-import org.uade.model.Pelicula;
-import org.uade.model.TarjetaDescuento;
+import org.uade.model.CondicionesDescuentoModel;
+import org.uade.model.PeliculaModel;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddMovieTest {
     private PeliculasController controller;
+    private TipoGenero genero;
+    private String director;
+    private int duracion;
+    private String titulo;
+    private TipoProyeccion tipoProyeccion;
+    private List<String> actores;
+    private CondicionesDescuentoModel descuento;
 
     @BeforeEach
     public void setUp() {
         controller = PeliculasController.getInstance();
-//        Vaciamos el listado de películas para correr todos los tests.
-        controller.reset();
+        controller.reset(); // Vaciamos el listado de películas
+
+        genero = TipoGenero.DRAMA;
+        director = "Christopher Nolan";
+        duracion = 174;
+        titulo = "Tenet";
+        tipoProyeccion = TipoProyeccion.TRES_D;
+        actores = new ArrayList<>();
+        descuento = new CondicionesDescuentoModel(
+                new Date(System.currentTimeMillis() - 100_000),
+                new Date(System.currentTimeMillis() + 1_000_000),
+                2,
+                0.3F,
+                TipoTarjeta.CLARIN_365,
+                new ArrayList<>()
+        );
     }
 
     @Test
     public void testAddMovie_Success() {
-        int id = 105;
-        TipoGenero genero = TipoGenero.DRAMA;
-        String director = "Christopher Nolan";
-        int duracion = 174;
-        String titulo = "Tenet";
-        TipoProyeccion tipoProyeccion = TipoProyeccion.TRES_D;
-        List<String> actores = new ArrayList<>();
-        CondicionesDescuento descuento = new CondicionesDescuento(new Date(), new Date(), 2, 0.3F, TipoTarjeta.CLARIN_365, new ArrayList<TarjetaDescuento>());
+        controller.altaPelicula(genero, director, duracion, titulo, tipoProyeccion, actores, descuento);
 
-        controller.altaPelicula(id, genero, director, duracion, titulo, tipoProyeccion, actores, descuento);
-
-        Pelicula pelicula = controller.buscarPelicula(id);
-        assertNotNull(pelicula, "La pelicula debería haberse registrado exitosamente.");
-
-        TipoGenero genre = pelicula.getGeneroID();
-        assertEquals(TipoGenero.DRAMA, genre);
+        PeliculaModel pelicula = controller.buscarPelicula(1);
+        assertNotNull(pelicula, "La película debería haberse registrado exitosamente.");
+        assertEquals(TipoGenero.DRAMA, pelicula.getGeneroID());
     }
 
     @Test
     public void testAddMovie_Fail_duplicated_movie() {
-        int id = 105;
-        TipoGenero genero = TipoGenero.DRAMA;
-        String director = "Christopher Nolan";
-        int duracion = 174;
-        String titulo = "Tenet";
-        TipoProyeccion tipoProyeccion = TipoProyeccion.TRES_D;
-        List<String> actores = new ArrayList<>();
-        CondicionesDescuento descuento = new CondicionesDescuento(new Date(), new Date(), 2, 0.3F, TipoTarjeta.CLARIN_365, new ArrayList<TarjetaDescuento>());
+        controller.altaPelicula(genero, director, duracion, titulo, tipoProyeccion, actores, descuento);
 
-//        Agregamos la película.
-        controller.altaPelicula(id, genero, director, duracion, titulo, tipoProyeccion, actores, descuento);
-//          Se intenta agragar nuevamente la película.
         Exception e = assertThrows(IllegalArgumentException.class, () -> {
-            controller.altaPelicula(id, genero, director, duracion, titulo, tipoProyeccion, actores, descuento);
+            controller.altaPelicula(genero, director, duracion, titulo, tipoProyeccion, actores, descuento);
         });
 
-        assertEquals("Esta pelicula ya existe", e.getMessage());
+        assertEquals("Esta película ya existe", e.getMessage());
     }
 }

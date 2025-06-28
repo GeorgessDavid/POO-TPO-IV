@@ -13,9 +13,8 @@ public class SucursalController {
 
     private int contadorId;
 		
-    public SucursalController() {
-    	sucursales = new ArrayList<SucursalModel>();
-    	sucursales.add(new SucursalModel(1, "Barracas", "Av Montes de Oca 1100", null));
+    private SucursalController() {
+    	sucursales = new ArrayList<>();
     }
 
     public static SucursalController getInstance(){
@@ -37,7 +36,7 @@ public class SucursalController {
         s.setSala(new SalaModel(salaID, denom, nroasientos));
     }
 
-    private SucursalModel buscarSucursal(int id){
+    public SucursalModel buscarSucursal(int id){
         for(SucursalModel s : sucursales){
             if(s.getSucursalID()==id) return s;
         }

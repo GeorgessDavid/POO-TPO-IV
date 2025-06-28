@@ -3,9 +3,7 @@ package org.uade.controller;
 import org.uade.dto.FuncionDTO;
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
-import org.uade.model.FuncionModel;
-import org.uade.model.PeliculaModel;
-import org.uade.model.SalaModel;
+import org.uade.model.*;
 
 import java.util.Date;
 import java.util.List;
@@ -30,32 +28,37 @@ public class FuncionController {
     }
 
     public static FuncionController getInstance(){
-        if(instance == null) instance = new FuncionController();
+        if (instance == null) instance = new FuncionController();
 
         return instance;
     }
 
-    /*
-    public void altaFuncion(Date fecha, String horario, List<Entrada> entradas, int idSala, int idPelicula){
-        Sala sala = SucursalController.buscarSala(idSala);
-        Pelicula pelicula = peliculasController.buscarPelicula(idPelicula);
 
-        funciones.add(new Funcion(fecha,contadorId,horario,entradas,sala,pelicula));
+    public void altaFuncion(Date fecha, String horario, int idSala, int idSucursal, int idPelicula) {
+        List<EntradaModel> entradas = new ArrayList<>();
+
+        SucursalModel sucursal = sucursalController.buscarSucursal(idSucursal);
+        if (sucursal == null) return; // TODO
+
+        SalaModel sala = sucursal.buscarSala(idSala);
+        if (sala == null) return; // TODO
+
+        PeliculaModel pelicula = peliculasController.buscarPelicula(idPelicula);
+        if (pelicula == null) return; // TODO
+
+        funciones.add(new FuncionModel(fecha, contadorId, horario, entradas, sala, pelicula));
         contadorId++;
     }
-    */
+
 
 
     public void bajaFuncion(int id){
         FuncionModel funcion = buscarFuncion(id);
-        if(funcion==null) return;
+        if (funcion == null) return;
 
         funciones.remove(funcion);
     }
 
-    public void modificarFuncion(){
-
-    }
 
     public int obtenerAsientosDisponiblePorFuncion(int funcionID) {
     	FuncionModel funcion = buscarFuncion(funcionID);
@@ -85,49 +88,44 @@ public class FuncionController {
         return funcionList;
     }
 
-    public int peliculaMasVista() {
-        // TODO implement here
-        return 0;
-    }
-
-    public int diaDeLaSemanaConMenorVentas() {
-        // TODO implement here
-        return 0;
-    }
 
     public List<FuncionModel> buscarPeliculaPorFuncion(int peliculaID) {
         List<FuncionModel> funcionesDeLaPelicula = new ArrayList<>();
+
         for (FuncionModel funcion : funciones) {
             if (funcion.getPelicula().getPeliculaId() == peliculaID){
                 funcionesDeLaPelicula.add(funcion);
             }
         }
+
         return funciones;
     }
 
     public List<FuncionModel> buscarPeliculaPorGenerosFuncion(TipoGenero genero) {
         List<FuncionModel> funcionesDeLaPelicula = new ArrayList<>();
+
         for (FuncionModel funcion : funciones) {
             if (funcion.getPelicula().getGeneroID() == genero){
                 funcionesDeLaPelicula.add(funcion);
             }
         }
+
         return funcionesDeLaPelicula;
     }
 
     public FuncionModel buscarFuncion(int id){
-
         for(FuncionModel funcion : funciones){
             if(funcion.getFuncionID() == id) return funcion;
         }
+
         return null;
     }
 
     private FuncionModel buscarFuncionPorFecha(Date fecha){
-
         for(FuncionModel funcion : funciones){
             if(funcion.getFecha().equals(fecha)) return funcion;
         }
+
         return null;
     }
 }

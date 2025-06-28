@@ -3,7 +3,6 @@ package org.uade.views;
 import org.uade.controller.PeliculasController;
 import org.uade.dto.PeliculaDTO;
 import org.uade.enums.TipoGenero;
-import org.uade.model.Pelicula;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
