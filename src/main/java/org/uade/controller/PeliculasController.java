@@ -12,15 +12,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class PeliculasController {
-    private static PeliculasController instance;
-    private List<Pelicula> peliculas;
 
-    public List<PeliculaDTO> getPeliculas() {
-        return peliculas
-                .stream()
-                .map(PeliculasController.getInstance()::modelToDto)
-                .toList();
-    }
+    private static PeliculasController instance;
+	private List<Pelicula> peliculas;
+
+    private int contadorId;
 
     private PeliculasController() {
     	peliculas= new ArrayList<Pelicula>();
@@ -33,9 +29,11 @@ public class PeliculasController {
         return instance;
     }
 
-    public void altaPelicula(int id,TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
-        if(buscarPelicula(id)!=null) throw new IllegalArgumentException("Esta pelicula ya existe");
-        peliculas.add(new Pelicula(id,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
+    public void altaPelicula(TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
+        if(buscarPelicula(contadorId)!=null) throw new IllegalArgumentException("Esta pelicula ya existe");
+
+        peliculas.add(new Pelicula(contadorId,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
+        contadorId++;
     }
 
     public void bajaPelicula(int id){
