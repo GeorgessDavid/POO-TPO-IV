@@ -17,7 +17,6 @@ public class Main {
         PeliculasController peliculasController = PeliculasController.getInstance();
         SucursalController sucursalController = SucursalController.getInstance();
 
-        // Agregamos nuevas películas
         peliculasController.altaPelicula(
                 TipoGenero.DRAMA,
                 "Michael Bay",
@@ -38,14 +37,12 @@ public class Main {
                 null
         );
 
-        // Agregamos una nueva sucursal con salas
         SalaModel sala1 = new SalaModel(1, "Sala Principal", 100);
         SalaModel sala2 = new SalaModel(2, "Sala Secundaria", 80);
         List<SalaModel> salasSucursal1 = Arrays.asList(sala1, sala2);
 
         sucursalController.agregarSucursal("Microcentro", "Av Corrientes 1234", salasSucursal1);
 
-        // Agregamos una sala a la sucursal existente con ID 1 (Barracas)
         sucursalController.agregarSala(1, 2, "Sala VIP", 50);
 
         System.out.println("Películas y sucursales cargadas correctamente.");
