@@ -18,6 +18,13 @@ public class PeliculasController {
 
     private int contadorId;
 
+    public List<PeliculaDTO> getPeliculas() {
+        return peliculas
+                .stream()
+                .map(PeliculasController.getInstance()::modelToDto)
+                .toList();
+    }
+
     private PeliculasController() {
     	peliculas= new ArrayList<Pelicula>();
     	peliculas.add(new Pelicula(1,TipoGenero.SUSPENSO, "Pelicula1", 180 , "Director X", TipoProyeccion.DOS_D, Arrays.asList("Actriz Principal", "Actor Secundario"),null));
