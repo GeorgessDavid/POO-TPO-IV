@@ -98,7 +98,7 @@ public class FuncionController {
             }
         }
 
-        return funciones;
+        return funcionesDeLaPelicula;
     }
 
     public List<FuncionModel> buscarPeliculaPorGenerosFuncion(TipoGenero genero) {
