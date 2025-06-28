@@ -14,13 +14,13 @@ public class GeneroConsultadoView extends JFrame {
     private final JTable tablaPeliculas;
     private final DefaultTableModel modeloTabla;
 
-    public GeneroConsultadoView(TipoGenero genero, PeliculaDTO[] peliculas) {
+    public GeneroConsultadoView(TipoGenero genero, List<PeliculaDTO> peliculas) {
         super("Películas del genéro " + genero.toString());
 
         setLayout(new BorderLayout());
 
         modeloTabla = new DefaultTableModel();
-        modeloTabla.setColumnIdentifiers(new String[] { "ID", "Nombre", "Duración (en minutos)", "Director", "Actores", "Proyección", "Condición de descuento" });
+        modeloTabla.setColumnIdentifiers(new String[] { "ID", "Nombre", "Duración (en minutos)", "Director", "Actores", "Proyección" });
 
         for (PeliculaDTO pelicula : peliculas) {
             Object[] fila = new Object[] {
@@ -30,7 +30,6 @@ public class GeneroConsultadoView extends JFrame {
                     pelicula.getDirector(),
                     pelicula.getActores(),
                     pelicula.getTipo(),
-                    pelicula.getCondicionesDescuento()
             };
 
             modeloTabla.addRow(fila);
@@ -42,22 +41,20 @@ public class GeneroConsultadoView extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tablaPeliculas);
         add(scrollPane, BorderLayout.CENTER);
 
-        setSize(600, 400);
-
+        setSize(800, 600);
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {
-        List<Pelicula> peliculas = PeliculasController.getInstance().buscarPeliculaPorGenero(TipoGenero.ROMANCE);
-        PeliculaDTO[] peliculasDtos = peliculas.stream()
+
+        List<PeliculaDTO> peliculas = PeliculasController.getInstance().buscarPeliculaPorGenero(TipoGenero.ROMANCE)
+                .stream()
                 .map(PeliculasController.getInstance()::modelToDto)
-                .toArray(PeliculaDTO[]::new);
+                .toList();
 
-        GeneroConsultadoView tabla = new GeneroConsultadoView(TipoGenero.ROMANCE, peliculasDtos);
-
-        tabla.setVisible(true);
+        GeneroConsultadoView tabla = new GeneroConsultadoView(TipoGenero.ROMANCE, peliculas);
     }
 
 }

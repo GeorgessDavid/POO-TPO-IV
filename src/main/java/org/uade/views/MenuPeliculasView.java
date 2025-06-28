@@ -3,12 +3,10 @@ package org.uade.views;
 import org.uade.controller.PeliculasController;
 import org.uade.dto.PeliculaDTO;
 import org.uade.enums.TipoGenero;
-import org.uade.model.Pelicula;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
+
 
 /*
 - Crear un menú en **Swing** que permita controlar los siguientes casos de uso:
@@ -16,7 +14,6 @@ import java.util.List;
     - Registrar una película por género.
 
     - Consultar las películas por género.
-
     - Emitir un reporte de las películas con mayor recaudación.
 */
 
@@ -37,7 +34,6 @@ public class MenuPeliculasView extends JFrame {
         menuItemRegistrarFuncion.addActionListener(e -> new RegistrarFuncionView());
 
         menuItemRegistrarPelicula = new JMenuItem("Registrar película");
-        //menuItemRegistrarPelicula.addActionListener(this);
 
         menuItemConsultarPeliculas = new JMenu("Consultar películas"); // <- Submenú
 
@@ -45,20 +41,22 @@ public class MenuPeliculasView extends JFrame {
 
         for (TipoGenero genero : generos) {
             JMenuItem generoItem = new JMenuItem(genero.toString());
+            menuItemConsultarPeliculas.add(generoItem);
+
             generoItem.addActionListener(e -> {
 
-                PeliculaDTO[] peliculas = PeliculasController.getInstance().buscarPeliculaPorGenero(TipoGenero.ROMANCE)
+                List<PeliculaDTO> peliculas = PeliculasController.getInstance().buscarPeliculaPorGenero(TipoGenero.ROMANCE)
                         .stream()
                         .map(PeliculasController.getInstance()::modelToDto)
-                        .toArray(PeliculaDTO[]::new);
+                        .toList();
 
+                System.out.println("Consultando películas del género: " + genero);
                 new GeneroConsultadoView(genero, peliculas);
-                System.out.println("Consultar películas del género: " + genero);
             });
-            menuItemConsultarPeliculas.add(generoItem);
         }
 
         menuItemEmitirReportePeliculas = new JMenuItem("Emitir reporte de películas");
+        menuItemEmitirReportePeliculas.addActionListener(e -> new EmitirReportePeliculasView());
         //menuItemEmitirReportePeliculas.addActionListener(this);
 
         menuFunciones.add(menuItemRegistrarFuncion);
