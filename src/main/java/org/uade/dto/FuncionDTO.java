@@ -1,21 +1,21 @@
 package org.uade.dto;
 
-import org.uade.model.Entrada;
-import org.uade.model.Pelicula;
-import org.uade.model.Sala;
+import org.uade.model.EntradaModel;
+import org.uade.model.PeliculaModel;
+import org.uade.model.SalaModel;
 
 import java.util.Date;
 import java.util.List;
 
 public class FuncionDTO {
-    private final Pelicula pelicula;
+    private final PeliculaModel pelicula;
     private final int funcionID;
     private final String horario;
     private final Date fecha;
-    private final List<Entrada> entradas;
-    private final Sala sala;
+    private final List<EntradaModel> entradas;
+    private final SalaModel sala;
 
-    public FuncionDTO(Pelicula pelicula, int funcionID, String horario, Date fecha, List<Entrada> entradas, Sala sala) {
+    public FuncionDTO(PeliculaModel pelicula, int funcionID, String horario, Date fecha, List<EntradaModel> entradas, SalaModel sala) {
         this.pelicula = pelicula;
         this.funcionID = funcionID;
         this.horario = horario;
@@ -24,7 +24,7 @@ public class FuncionDTO {
         this.sala = sala;
     }
 
-    public Pelicula getPelicula() {
+    public PeliculaModel getPelicula() {
         return pelicula;
     }
 
@@ -40,18 +40,18 @@ public class FuncionDTO {
         return fecha;
     }
 
-    public List<Entrada> getEntradas() {
+    public List<EntradaModel> getEntradas() {
         return entradas;
     }
 
-    public Sala getSala() {
+    public SalaModel getSala() {
         return sala;
     }
 
     public float calcularMontoPorEntradaDeLaPelicula() {
         float total = 0.0F;
 
-        for (Entrada entrada : entradas) {
+        for (EntradaModel entrada : entradas) {
             float precioEntrada = entrada.getPrecio() - (entrada.getPrecio() * pelicula.getCondicionesDescuento().getDescuento());
 
             total += precioEntrada;

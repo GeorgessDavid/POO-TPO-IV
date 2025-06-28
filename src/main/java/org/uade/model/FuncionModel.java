@@ -2,18 +2,17 @@ package org.uade.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
 
-public class Funcion {
+public class FuncionModel {
 
-    private Pelicula pelicula;
+    private PeliculaModel pelicula;
     private int funcionID;
     private String horario;
     private Date fecha;
-    private List<Entrada> entradas;
-    private Sala sala;
+    private List<EntradaModel> entradas;
+    private SalaModel sala;
 
-    public Funcion(Date fecha, int funcionID, String horario,List<Entrada> entradas, Sala sala, Pelicula pelicula) {
+    public FuncionModel(Date fecha, int funcionID, String horario, List<EntradaModel> entradas, SalaModel sala, PeliculaModel pelicula) {
     	this.fecha = fecha;
     	this.funcionID = funcionID;
         this.entradas = entradas;
@@ -23,7 +22,7 @@ public class Funcion {
     }
 
 
-    public Pelicula getPelicula() {
+    public PeliculaModel getPelicula() {
         return pelicula;
     }
 
@@ -35,11 +34,11 @@ public class Funcion {
         return horario;
     }
 
-    public List<Entrada> getEntradas() {
+    public List<EntradaModel> getEntradas() {
         return entradas;
     }
 
-    public Sala getSala() {
+    public SalaModel getSala() {
         return sala;
     }
 
@@ -50,7 +49,7 @@ public class Funcion {
     public float calcularMontoPorEntradaDeLaPelicula() {
         float total = 0.0F;
 
-        for (Entrada entrada : entradas) {
+        for (EntradaModel entrada : entradas) {
             float precioEntrada = entrada.getPrecio() - (entrada.getPrecio() * pelicula.getCondicionesDescuento().getDescuento());
 
             total += precioEntrada;

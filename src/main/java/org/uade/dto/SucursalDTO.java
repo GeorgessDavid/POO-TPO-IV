@@ -1,6 +1,6 @@
 package org.uade.dto;
 
-import org.uade.model.Sala;
+import org.uade.model.SalaModel;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ public class SucursalDTO {
     private final int sucursalID;
     private final String denominacion;
     private final String direccion;
-    private final List<Sala> salas;
+    private final List<SalaModel> salas;
 
-    public SucursalDTO(int sucursalID, String denominacion, String direccion, List<Sala> salas) {
+    public SucursalDTO(int sucursalID, String denominacion, String direccion, List<SalaModel> salas) {
         this.sucursalID = sucursalID;
         this.denominacion = denominacion;
         this.direccion = direccion;
@@ -29,7 +29,7 @@ public class SucursalDTO {
         return direccion;
     }
 
-    public List<Sala> getSalas() {
+    public List<SalaModel> getSalas() {
         return salas;
     }
 }

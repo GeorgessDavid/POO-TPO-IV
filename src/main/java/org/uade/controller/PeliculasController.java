@@ -4,8 +4,8 @@ import org.uade.dto.PeliculaDTO;
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
 import org.uade.exceptions.NotFoundException;
-import org.uade.model.CondicionesDescuento;
-import org.uade.model.Pelicula;
+import org.uade.model.CondicionesDescuentoModel;
+import org.uade.model.PeliculaModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PeliculasController {
 
     private static PeliculasController instance;
-	private List<Pelicula> peliculas;
+	private List<PeliculaModel> peliculas;
 
     private int contadorId;
 
@@ -26,8 +26,8 @@ public class PeliculasController {
     }
 
     private PeliculasController() {
-    	peliculas= new ArrayList<Pelicula>();
-    	peliculas.add(new Pelicula(1,TipoGenero.SUSPENSO, "Pelicula1", 180 , "Director X", TipoProyeccion.DOS_D, Arrays.asList("Actriz Principal", "Actor Secundario"),null));
+    	peliculas= new ArrayList<PeliculaModel>();
+    	peliculas.add(new PeliculaModel(1,TipoGenero.SUSPENSO, "Pelicula1", 180 , "Director X", TipoProyeccion.DOS_D, Arrays.asList("Actriz Principal", "Actor Secundario"),null));
     }
 
     public static PeliculasController getInstance(){
@@ -36,15 +36,15 @@ public class PeliculasController {
         return instance;
     }
 
-    public void altaPelicula(TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuento descuento){
+    public void altaPelicula(TipoGenero genero, String director, int duracionMinutos, String nombre, TipoProyeccion proyeccion, List<String> actores, CondicionesDescuentoModel descuento){
         if(buscarPelicula(contadorId)!=null) throw new IllegalArgumentException("Esta pelicula ya existe");
 
-        peliculas.add(new Pelicula(contadorId,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
+        peliculas.add(new PeliculaModel(contadorId,genero,director,duracionMinutos,nombre,proyeccion,actores,descuento));
         contadorId++;
     }
 
     public void bajaPelicula(int id){
-        Pelicula pelicula = buscarPelicula(id);
+        PeliculaModel pelicula = buscarPelicula(id);
         if(pelicula == null) return;
 
         peliculas.remove(pelicula);
@@ -52,16 +52,16 @@ public class PeliculasController {
 
     public void modificarPelicula(){}
 
-    public Pelicula buscarPelicula(int id){
-        for(Pelicula pelicula : peliculas){
+    public PeliculaModel buscarPelicula(int id){
+        for(PeliculaModel pelicula : peliculas){
             if(pelicula.getPeliculaId()==id) return pelicula;
         }
         return null;
     }
 
-    public List<Pelicula> buscarPeliculaPorGenero(TipoGenero genero){
-        List<Pelicula> pelis = new ArrayList<Pelicula>();
-        for(Pelicula pelicula : peliculas){
+    public List<PeliculaModel> buscarPeliculaPorGenero(TipoGenero genero){
+        List<PeliculaModel> pelis = new ArrayList<PeliculaModel>();
+        for(PeliculaModel pelicula : peliculas){
             if(pelicula.getGeneroID()==genero) pelis.add(pelicula);
         }
 
@@ -70,7 +70,7 @@ public class PeliculasController {
         return pelis;
     }
 
-    public PeliculaDTO modelToDto(Pelicula pelicula) {
+    public PeliculaDTO modelToDto(PeliculaModel pelicula) {
         return new PeliculaDTO(
                 pelicula.getPeliculaId(),
                 pelicula.getGeneroID(),

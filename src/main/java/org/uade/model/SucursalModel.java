@@ -2,14 +2,14 @@ package org.uade.model;
 
 import java.util.List;
 
-public class Sucursal {
+public class SucursalModel {
 
     private int sucursalID;
     private String denominacion;
     private String direccion;
-    private List<Sala> salas;
+    private List<SalaModel> salas;
 
-    public Sucursal(int sucursalID, String denominacion, String direccion,List<Sala> salas) {
+    public SucursalModel(int sucursalID, String denominacion, String direccion, List<SalaModel> salas) {
     	this.denominacion = denominacion;
     	this.direccion = direccion;
     	this.sucursalID = sucursalID;
@@ -28,11 +28,11 @@ public class Sucursal {
         return direccion;
     }
 
-    public List<Sala> getSalas() {
+    public List<SalaModel> getSalas() {
         return salas;
     }
 
-    public void setSala(Sala sala){
+    public void setSala(SalaModel sala){
         salas.add(sala);
     }
 }

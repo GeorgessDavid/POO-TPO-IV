@@ -3,15 +3,15 @@ package org.uade.model;
 import java.util.Date;
 import java.util.List;
 
-public class Venta {
+public class VentaModel {
 
     private int ventaID;
     private Date fchVenta;
-    private List<Combo> combos;
-    private Funcion funcion;
-    private TarjetaDescuento tarjetaDescuento;
+    private List<ComboModel> combos;
+    private FuncionModel funcion;
+    private TarjetaDescuentoModel tarjetaDescuento;
 
-    public Venta(int ventaID, Date fchVenta, List<Combo> combos, Funcion funcion) {
+    public VentaModel(int ventaID, Date fchVenta, List<ComboModel> combos, FuncionModel funcion) {
     	this.combos = combos;
     	this.funcion = funcion;
     	this.fchVenta = fchVenta;
@@ -25,33 +25,33 @@ public class Venta {
         return fchVenta;
     }
 
-    public List<Combo> getCombos() {
+    public List<ComboModel> getCombos() {
         return combos;
     }
 
-    public Funcion getFuncion() {
+    public FuncionModel getFuncion() {
         return funcion;
     }
 
-    public TarjetaDescuento getTarjetaDescuento(){
+    public TarjetaDescuentoModel getTarjetaDescuento(){
         return tarjetaDescuento;
     }
 
     public float getTotal() { return calcularMontoDeLaVentaPorFuncionCombos()+calcularMontoPorComboDeVenta();}
 
-    public void setFuncion(Funcion funcion) {
+    public void setFuncion(FuncionModel funcion) {
         this.funcion = funcion;
     }
 
-    public void setCombo(Combo combo){
+    public void setCombo(ComboModel combo){
         combos.add(combo);
     }
 
     public float calcularMontoPorComboDeVenta(){
         float total=  0.0f;
-        for (Combo combo : combos) {
+        for (ComboModel combo : combos) {
            total =+  (combo.getPrecio()-(combo.getPrecio()*
-                   CondicionesDescuento.getDescuentoPorTarjeta(tarjetaDescuento.getTipoTarjeta())));
+                   CondicionesDescuentoModel.getDescuentoPorTarjeta(tarjetaDescuento.getTipoTarjeta())));
         }
         return total;
     }

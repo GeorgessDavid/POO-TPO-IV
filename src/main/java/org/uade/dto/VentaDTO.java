@@ -1,8 +1,8 @@
 package org.uade.dto;
 
-import org.uade.model.Combo;
-import org.uade.model.Funcion;
-import org.uade.model.TarjetaDescuento;
+import org.uade.model.ComboModel;
+import org.uade.model.FuncionModel;
+import org.uade.model.TarjetaDescuentoModel;
 
 import java.util.Date;
 import java.util.List;
@@ -10,11 +10,11 @@ import java.util.List;
 public class VentaDTO {
     private final int ventaID;
     private final Date fchVenta;
-    private final List<Combo> combos;
-    private final Funcion funcion;
-    private final TarjetaDescuento tarjetaDescuento;
+    private final List<ComboModel> combos;
+    private final FuncionModel funcion;
+    private final TarjetaDescuentoModel tarjetaDescuento;
 
-    public VentaDTO(int ventaID, Date fchVenta, List<Combo> combos, Funcion funcion, TarjetaDescuento tarjetaDescuento) {
+    public VentaDTO(int ventaID, Date fchVenta, List<ComboModel> combos, FuncionModel funcion, TarjetaDescuentoModel tarjetaDescuento) {
         this.ventaID = ventaID;
         this.fchVenta = fchVenta;
         this.combos = combos;
@@ -30,15 +30,15 @@ public class VentaDTO {
         return fchVenta;
     }
 
-    public List<Combo> getCombos() {
+    public List<ComboModel> getCombos() {
         return combos;
     }
 
-    public Funcion getFuncion() {
+    public FuncionModel getFuncion() {
         return funcion;
     }
 
-    public TarjetaDescuento getTarjetaDescuento() {
+    public TarjetaDescuentoModel getTarjetaDescuento() {
         return tarjetaDescuento;
     }
 

@@ -1,14 +1,14 @@
 package org.uade.dto;
 
-import org.uade.model.CondicionesDescuento;
+import org.uade.model.CondicionesDescuentoModel;
 
 public class ComboDTO {
     private final int comboID;
     private final String descripcion;
     private final float precio;
-    private final CondicionesDescuento condicionesDescuento;
+    private final CondicionesDescuentoModel condicionesDescuento;
 
-    public ComboDTO(int comboID, String descripcion, float precio, CondicionesDescuento condicionesDescuento) {
+    public ComboDTO(int comboID, String descripcion, float precio, CondicionesDescuentoModel condicionesDescuento) {
         this.comboID = comboID;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -27,7 +27,7 @@ public class ComboDTO {
         return precio;
     }
 
-    public CondicionesDescuento getCondicionesDescuento() {
+    public CondicionesDescuentoModel getCondicionesDescuento() {
         return condicionesDescuento;
     }
 

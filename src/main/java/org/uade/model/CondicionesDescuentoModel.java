@@ -5,16 +5,16 @@ import org.uade.enums.TipoTarjeta;
 import java.util.Date;
 import java.util.List;
 
-public class CondicionesDescuento {
+public class CondicionesDescuentoModel {
 
     private Date fchDesde;
     private Date fchHasta;
     private int diaSemana;
     private float porcentaje;
     private TipoTarjeta tipoTarjeta;
-    private List<TarjetaDescuento> tarjetaDescuento;
+    private List<TarjetaDescuentoModel> tarjetaDescuento;
 
-    public CondicionesDescuento(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuento> tarjetaDescuento) {
+    public CondicionesDescuentoModel(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuentoModel> tarjetaDescuento) {
         this.diaSemana = diaSemana;
     	this.fchDesde = fchDesde;
     	this.fchHasta = fchHasta;
@@ -43,17 +43,17 @@ public class CondicionesDescuento {
         return tipoTarjeta;
     }
 
-    public List<TarjetaDescuento> getTarjetaDescuento(){
+    public List<TarjetaDescuentoModel> getTarjetaDescuento(){
         return tarjetaDescuento;
     }
 
-    public void setTarjetaDescuento(TarjetaDescuento tarjeta){
+    public void setTarjetaDescuento(TarjetaDescuentoModel tarjeta){
         tarjetaDescuento.add(tarjeta);
     }
 
     public float getDescuento(){
         float descuento = 0.0f;
-        for (TarjetaDescuento tarjetaDescuento: tarjetaDescuento) {
+        for (TarjetaDescuentoModel tarjetaDescuento: tarjetaDescuento) {
             descuento += getDescuentoPorTarjeta(tarjetaDescuento.getTipoTarjeta());
         }
         descuento=descuento+porcentaje;

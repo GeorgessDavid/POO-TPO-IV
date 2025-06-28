@@ -1,13 +1,13 @@
 package org.uade.dto;
 
-import org.uade.model.Funcion;
+import org.uade.model.FuncionModel;
 
 public class EntradaDTO {
     private final float precio;
     private final int nroAsiento;
-    private final Funcion funcion;
+    private final FuncionModel funcion;
 
-    public EntradaDTO(float precio, int nroAsiento, Funcion funcion) {
+    public EntradaDTO(float precio, int nroAsiento, FuncionModel funcion) {
         this.precio = precio;
         this.nroAsiento = nroAsiento;
         this.funcion = funcion;
@@ -21,7 +21,7 @@ public class EntradaDTO {
         return nroAsiento;
     }
 
-    public Funcion getFuncion() {
+    public FuncionModel getFuncion() {
         return funcion;
     }
 }

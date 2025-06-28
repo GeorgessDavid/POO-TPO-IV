@@ -2,13 +2,13 @@ package org.uade.model;
 
 import org.uade.enums.TipoTarjeta;
 
-public class TarjetaDescuento {
+public class TarjetaDescuentoModel {
 
     private int tarjetaID;
     private TipoTarjeta tipoTarjeta;
     private String numeroTarjeta;
 
-    public TarjetaDescuento(int tarjetaID, TipoTarjeta tipoTarjeta, String numeroTarjeta) {
+    public TarjetaDescuentoModel(int tarjetaID, TipoTarjeta tipoTarjeta, String numeroTarjeta) {
     	this.numeroTarjeta = numeroTarjeta;
     	this.tarjetaID = tarjetaID;
     	this.tipoTarjeta = tipoTarjeta;

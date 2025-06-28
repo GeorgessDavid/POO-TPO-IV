@@ -4,9 +4,8 @@ import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
 
 import java.util.List;
-import java.util.ArrayList;
 
-public class Pelicula {
+public class PeliculaModel {
 
     private int id;
     private TipoGenero generoID;
@@ -15,9 +14,9 @@ public class Pelicula {
     private String director;
     private List<String> actores;
     private TipoProyeccion tipo;
-    private CondicionesDescuento condicionesDescuento;
+    private CondicionesDescuentoModel condicionesDescuento;
 
-    public Pelicula(int id, TipoGenero generoID, String director, int duracionEnMinutos, String nombrePelicula, TipoProyeccion tipo, List<String> actores, CondicionesDescuento descuento) {
+    public PeliculaModel(int id, TipoGenero generoID, String director, int duracionEnMinutos, String nombrePelicula, TipoProyeccion tipo, List<String> actores, CondicionesDescuentoModel descuento) {
         this.id = id;
         this.director = director;
         this.duracionEnMinutos = duracionEnMinutos;
@@ -52,7 +51,7 @@ public class Pelicula {
         return tipo;
     }
 
-    public CondicionesDescuento getCondicionesDescuento() {
+    public CondicionesDescuentoModel getCondicionesDescuento() {
         return condicionesDescuento;
     }
 

@@ -2,7 +2,7 @@ package org.uade.dto;
 
 import org.uade.enums.TipoGenero;
 import org.uade.enums.TipoProyeccion;
-import org.uade.model.CondicionesDescuento;
+import org.uade.model.CondicionesDescuentoModel;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ public class PeliculaDTO {
     private final String director;
     private final List<String> actores;
     private final TipoProyeccion tipo;
-    private final CondicionesDescuento condicionesDescuento;
+    private final CondicionesDescuentoModel condicionesDescuento;
 
-    public PeliculaDTO(int id, TipoGenero generoID, String nombrePelicula, int duracionEnMinutos, String director, List<String> actores, TipoProyeccion tipo, CondicionesDescuento condicionesDescuento) {
+    public PeliculaDTO(int id, TipoGenero generoID, String nombrePelicula, int duracionEnMinutos, String director, List<String> actores, TipoProyeccion tipo, CondicionesDescuentoModel condicionesDescuento) {
         this.id = id;
         this.generoID = generoID;
         this.nombrePelicula = nombrePelicula;
@@ -55,7 +55,7 @@ public class PeliculaDTO {
         return tipo;
     }
 
-    public CondicionesDescuento getCondicionesDescuento() {
+    public CondicionesDescuentoModel getCondicionesDescuento() {
         return condicionesDescuento;
     }
 }

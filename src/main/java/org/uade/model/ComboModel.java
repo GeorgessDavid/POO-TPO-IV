@@ -1,13 +1,13 @@
 package org.uade.model;
 
-public class Combo {
+public class ComboModel {
 
     private int comboID;
     private String descripcion;
     private float precio;
-    public CondicionesDescuento contiene;
+    public CondicionesDescuentoModel contiene;
 
-    public Combo(int comboID, String descripcion, float precio, CondicionesDescuento contiene  ) {
+    public ComboModel(int comboID, String descripcion, float precio, CondicionesDescuentoModel contiene  ) {
     	this.comboID = comboID;
     	this.contiene = contiene;
     	this.descripcion = descripcion;
@@ -26,7 +26,7 @@ public class Combo {
         return precio;
     }
 
-    public CondicionesDescuento getCondicionesDescuento() {
+    public CondicionesDescuentoModel getCondicionesDescuento() {
         return contiene;
     }
 }

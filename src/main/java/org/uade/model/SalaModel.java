@@ -1,12 +1,12 @@
 package org.uade.model;
 
-public class Sala {
+public class SalaModel {
 
     private int salaID;
     private String denominacion;
     private int asientos;
 
-    public Sala(int salaID, String denominacion, int asientos) {
+    public SalaModel(int salaID, String denominacion, int asientos) {
     	this.asientos = asientos;
     	this.denominacion = denominacion;
     	this.salaID = salaID;

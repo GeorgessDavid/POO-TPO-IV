@@ -1,7 +1,7 @@
 package org.uade.dto;
 
 import org.uade.enums.TipoTarjeta;
-import org.uade.model.TarjetaDescuento;
+import org.uade.model.TarjetaDescuentoModel;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,9 @@ public class CondicionesDescuentoDTO {
     private final int diaSemana;
     private final float porcentaje;
     private final TipoTarjeta tipoTarjeta;
-    private final List<TarjetaDescuento> tarjetaDescuento;
+    private final List<TarjetaDescuentoModel> tarjetaDescuento;
 
-    public CondicionesDescuentoDTO(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuento> tarjetaDescuento) {
+    public CondicionesDescuentoDTO(Date fchDesde, Date fchHasta, int diaSemana, float porcentaje, TipoTarjeta tipoTarjeta, List<TarjetaDescuentoModel> tarjetaDescuento) {
         this.fchDesde = fchDesde;
         this.fchHasta = fchHasta;
         this.diaSemana = diaSemana;
@@ -43,7 +43,7 @@ public class CondicionesDescuentoDTO {
         return tipoTarjeta;
     }
 
-    public List<TarjetaDescuento> getTarjetaDescuento() {
+    public List<TarjetaDescuentoModel> getTarjetaDescuento() {
         return tarjetaDescuento;
     }
 
@@ -63,7 +63,7 @@ public class CondicionesDescuentoDTO {
     public float getDescuento() {
         float descuento = 0.0F;
 
-        for (TarjetaDescuento tarjeta : tarjetaDescuento) {
+        for (TarjetaDescuentoModel tarjeta : tarjetaDescuento) {
             descuento += getDescuentoPorTarjeta(tarjeta.getTipoTarjeta());
         }
 

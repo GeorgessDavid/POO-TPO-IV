@@ -1,12 +1,12 @@
 package org.uade.model;
 
-public class Entrada {
+public class EntradaModel {
 
     private float precio;
     private int nroAsiento;
-    public Funcion funcion;
+    public FuncionModel funcion;
 
-    public Entrada(int nroAsiento, Funcion funcion, float precio) {
+    public EntradaModel(int nroAsiento, FuncionModel funcion, float precio) {
     	this.funcion = funcion;
     	this.nroAsiento = nroAsiento;
     	this.precio = precio;
@@ -20,7 +20,7 @@ public class Entrada {
         return nroAsiento;
     }
 
-    public Funcion getFuncion() {
+    public FuncionModel getFuncion() {
         return funcion;
     }
 }
